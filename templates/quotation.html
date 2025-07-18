@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AJS-Quotation Details</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #232f3e;
+    }
+    form {
+      width: 90%;
+      max-width: 900px;
+      margin: 0 auto;
+      background: white;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border-radius: 10px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    th, td {
+      padding: 12px;
+      border: 1px solid #ddd;
+      text-align: center;
+    }
+    input[type="text"],
+    input[type="date"],
+    input[type="number"] {
+      width: 100%;
+      padding: 6px;
+      box-sizing: border-box;
+    }
+    .checkbox-label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #232f3e;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #1a2533;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>AJS Quotation Details</h1>
+
+  <form action="/quotation" method="POST">
+    <table>
+      <thead>
+        <tr>
+          <th>Quotation Number</th>
+          <th>Manager</th>
+          <th>Date</th>
+          <th>Description</th>
+          <th>Total Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><input type="text" name="quotation_number" required></td>
+          <td><input type="text" name="manager" required></td>
+          <td><input type="date" name="date" required></td>
+          <td><input type="text" name="description" required></td>
+          <td><input type="number" name="total_amount" required></td>
+        </tr>
+      </tbody>
+    </table>
+    <button type="submit">Submit</button>
+  </form>
+<br/>
+  <form method="get" action="/quotation" style="width: 90%; max-width: 900px; margin: 0 auto 30px auto; background: white; padding: 20px; box-shadow: 0 0 10px rgba(0,0,0,0.1); border-radius: 10px;">
+    <h2>Filter Quotations</h2>
+  <label>Search Quotation No: <input type="text" name="quotation_number"></label><br/>
+  <label>Manager: <input type="text" name="manager"></label><br/>
+  <label>Status: <input type="text" name="status"></label><br/>
+  <label>Date: <input type="date" name="date"></label><br/>
+  <button type="submit">Filter</button>
+  </form>
+
+  <div class="output-table">
+    <h2>Submitted Quotations</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Quotation No.</th>
+          <th>Manager</th>
+          <th>Date</th>
+          <th>Description</th>
+          <th>Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for q in quotation %}
+        <tr>
+          <td>{{ q[0] }}</td>
+          <td>{{ q[1] }}</td>
+          <td>{{ q[2] }}</td>
+          <td>{{ q[3] }}</td>
+          <td>{{ q[4] }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+<a href="{{ url_for('logout') }}">Logout</a>
+</body>
+</html>

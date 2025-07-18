@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJS Enterprises</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <script>
+        function toggleImage(event) {
+            const img = event.currentTarget.querySelector('.service-img');
+            if (img.style.display === 'block') {
+                img.style.display = 'none';
+            } else {
+                img.style.display = 'block';
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+    <div style="display: flex; align-items: center; gap: 20px;">
+        <div class="dropdown">
+            <button class="dropbtn">More <i class="fa fa-caret-down"></i></button>
+            <div class="dropdown-content">
+                <a href="/quotation">Quotation</a>
+                <a href="/invoice">Invoice</a>
+            </div>
+        </div>
+        <h1>AJS Enterprises</h1> 
+    </header>
+    <div class="container">
+        <div class="home">
+            <h2>Welcome to AJS Enterprises</h2>
+            <p>Your trusted partner for industrial solutions. We specialize in supplying materials, mounting and wiring, designing components, and machine shifting activities.</p>
+            <p>With years of experience in the industry, AJS Enterprises is committed to providing high-quality services to our clients. Our expertise and dedication ensure seamless project execution and customer satisfaction.</p>
+            <p>Our team of professionals is equipped with the latest tools and techniques to handle all your industrial needs efficiently and effectively.</p>
+        </div>
+        <h2 id="team">Meet Our Team</h2>
+        <ul>
+            <li>Mallikarjun S Hulihalli - Propreitor</li>
+            <li>Govindraj R S - Technician</li>
+            <li>Pramodh C M - Technician</li>
+        </ul>
+        <h2 id="services">Our Services</h2>
+        <ul>
+            <li onclick="toggleImage(event)">
+                Supply of materials: We provide a wide range of materials for industrial applications.
+                <div class="service-img-container">
+                    <img class="service-img" src="{{ url_for('static', filename='logistics-service.jpg') }}" alt="Supply of materials" height="300" width="400">
+                </div>
+            </li>
+
+            <li onclick="toggleImage(event)">
+                Retrofitting: We offer professional mounting and wiring services for industrial equipment.
+                <div class="service-img-container">
+                    <img class="service-img" src="{{ url_for('static', filename='employee.jpeg') }}" alt="Mounting and Wiring" height="300" width="400">
+                </div>
+            </li>
+
+            <li onclick="toggleImage(event)">
+                Designing components: We provide custom design solutions for industrial components.
+                <div class="service-img-container">
+                    <img class="service-img" src="{{ url_for('static', filename='designing.jpg') }}" alt="Designing components" height="300" width="400">
+                </div>
+            </li>
+
+            <li onclick="toggleImage(event)">
+                Plant shifting activity: We specialize in machine shifting activities for industrial plants.
+                <div class="service-img-container">
+                    <img class="service-img" src="{{ url_for('static', filename='industrial-plant-shifting.jpg') }}" alt="Machine shifting activity" height="300" width="400">
+                </div>
+            </li>
+        </ul>
+        <h2 id="clients">Our Clients</h2>
+        <ul>
+            <li><img class="client-logo" src="{{ url_for('static', filename='bsch.jpg') }}" alt="Bosch"> Bosch Ltd</li>
+            <li><img class="client-logo" src="{{ url_for('static', filename='download.jpg') }}" alt="Rexroth"> Rexroth - A Bosch Company</li>
+            <li><img class="client-logo" src="{{ url_for('static', filename='logic.jpg') }}" alt="Logic"> Logic Machine Tools</li>
+        </ul>
+    </div>
+    <a href="{{ url_for('logout') }}">Logout</a>
+    <div class="contact" id="contact">
+        <h2>Contact Us</h2>
+        <p>Propreitor: Mallikarjun S Hulihalli</p>
+        <p>Email: ajsenterprises2007@yahoo.co.in</p>
+        <p>Phone: +91 98800 68813</p>
+        <p>Address: 2404 8th block extension, SMV Layout Muddinapalya main road, Banglore 560 091 Banglore, India</p>
+    </div>
+    <footer>
+        &copy; 2025 AJS Enterprises. All rights reserved.
+    </footer>
+</body>
+</html>
