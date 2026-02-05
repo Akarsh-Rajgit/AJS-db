@@ -23,6 +23,7 @@
         <div class="dropdown">
             <button class="dropbtn">More <i class="fa fa-caret-down"></i></button>
             <div class="dropdown-content">
+                <a href="/home">Home</a>
                 <a href="/quotation">Quotation</a>
                 <a href="/invoice">Invoice</a>
             </div>
@@ -40,7 +41,10 @@
         <ul>
             <li>Mallikarjun S Hulihalli - Propreitor</li>
             <li>Govindraj R S - Technician</li>
-            <li>Pramodh C M - Technician</li>
+            <li>Renukaiah K G - Technician</li>
+            <li>Krishna - Technician</li>
+            <li>Lokesh T - Technician</li>
+            <li>Rathode N R - Mechanical Technician</li>
         </ul>
         <h2 id="services">Our Services</h2>
         <ul>
@@ -79,7 +83,7 @@
             <li><img class="client-logo" src="{{ url_for('static', filename='logic.jpg') }}" alt="Logic"> Logic Machine Tools</li>
         </ul>
     </div>
-    <a href="{{ url_for('logout') }}">Logout</a>
+    <button><a href="{{ url_for('logout') }}">Logout</a></button>
     <div class="contact" id="contact">
         <h2>Contact Us</h2>
         <p>Propreitor: Mallikarjun S Hulihalli</p>
