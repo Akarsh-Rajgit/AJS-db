@@ -5,17 +5,18 @@ import os
 from werkzeug.security import check_password_hash
 from waitress import serve
 
+load_dotenv()
+
 app = Flask(__name__)
 
 conn = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    password="Ichigo_bankai24",
-    database="ajs"
+    host=os.getenv("DB_HOST", "localhost"),
+    user=os.getenv("DB_USER", "root"),
+    password=os.getenv("DB_PASSWORD", "Ichigo_bankai24"),
+    database=os.getenv("DB_NAME", "ajs")
 )
 cursor = conn.cursor()
-
-load_dotenv() 
+ 
 try:
     app.secret_key = os.environ["SECRET_KEY"]
 except KeyError:
