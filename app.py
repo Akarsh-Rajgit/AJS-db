@@ -3,6 +3,7 @@ import mysql.connector
 from dotenv import load_dotenv
 import os
 from werkzeug.security import check_password_hash
+from waitress import serve
 
 app = Flask(__name__)
 
@@ -81,6 +82,7 @@ def quotation():
 
 @app.route('/invoice', methods=['GET', 'POST'])
 def invoice():
+    error = None
     if request.method == 'POST':
         invoice_no = request.form['invoice_number']
         quotation_no = request.form['quotation_number']
@@ -89,12 +91,17 @@ def invoice():
         total_amount = request.form['total_amount']
         payable_amount = request.form['payable_amount']
 
-        cursor.execute("""
-            INSERT INTO invoice (invoice_no, quotation_no, date, description, amount, payable_amount)
-            VALUES (%s, %s, %s, %s, %s, %s)
-        """, (invoice_no, quotation_no, date, description, total_amount, payable_amount))
-        conn.commit()
-        return redirect('/invoice')
+        try:
+            cursor.execute("""
+                INSERT INTO invoice (invoice_no, quotation_no, date, description, amount, payable_amount)
+                VALUES (%s, %s, %s, %s, %s, %s)
+            """, (invoice_no, quotation_no, date, description, total_amount, payable_amount))
+            conn.commit()
+            return redirect('/invoice')
+        except mysql.connector.errors.IntegrityError:
+            error = f"Error: Quotation number '{quotation_no}' does not exist in the system."
+        except Exception as e:
+            error = f"An error occurred: {str(e)}"
 
     query = "SELECT * FROM invoice WHERE 1"
     params = []
@@ -108,7 +115,7 @@ def invoice():
     cursor.execute(query, params)
     results = cursor.fetchall()
 
-    return render_template('invoice.html', invoice=results)
+    return render_template('invoice.html', invoice=results, error=error)
 
 @app.route('/logout')
 def logout():
