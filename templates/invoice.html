@@ -4,15 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AJS-Invoice details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
-      padding: 20px;
-    }
+    /* body style removed to use style.css */
     h1 {
       text-align: center;
-      color: #232f3e;
+      color: #f4f6f8;
     }
     form {
       width: 90%;
@@ -46,7 +43,7 @@
       justify-content: center;
       gap: 8px;
     }
-    button {
+    #sub {
       margin-top: 20px;
       padding: 10px 20px;
       font-size: 16px;
@@ -56,13 +53,31 @@
       border-radius: 4px;
       cursor: pointer;
     }
-    button:hover {
+    #sub:hover {
       background-color: #1a2533;
     }
   </style>
 </head>
 <body>
-    <h1>AJS Invoice Details</h1>
+    <header>
+    <div style="display: flex; align-items: center; gap: 20px;">
+        <div class="dropdown">
+            <button class="dropbtn">More <i class="fa fa-caret-down"></i></button>
+            <div class="dropdown-content">
+                <a href="/home">Home</a>
+                <a href="/quotation">Quotation</a>
+                <a href="/invoice">Invoice</a>
+            </div>
+        </div>
+        <h1>AJS Invoice Details</h1>
+    </div>
+    </header>
+
+    {% if error %}
+    <div style="color: red; background: #fee; padding: 10px; border: 1px solid red; margin: 10px auto; width: 90%; max-width: 900px; border-radius: 5px; text-align: center;">
+        {{ error }}
+    </div>
+    {% endif %}
 
   <form action="/invoice" method="POST">
     <table>
@@ -87,7 +102,7 @@
         </tr>
       </tbody>
     </table>
-    <button type="submit">Submit</button>
+    <button id="sub" type="submit">Submit</button>
   </form>
 
   <form method="get" action="/invoice" style="width: 90%; max-width: 900px; margin: 0 auto 30px auto; background: white; padding: 20px; box-shadow: 0 0 10px rgba(0,0,0,0.1); border-radius: 10px;">
@@ -99,7 +114,7 @@
       <td><label>Date:</label><br><input type="date" name="date"></td>
     </tr>
   </table>
-  <button type="submit">Filter</button>
+  <button id = "sub"type="submit">Filter</button>
 </form>
 
   <div class="output-table">
@@ -129,6 +144,6 @@
       </tbody>
     </table>
   </div>
-<a href="{{ url_for('logout') }}">Logout</a>
+<button><a href="{{ url_for('logout') }}">Logout</a></button>
 </body>
 </html>
